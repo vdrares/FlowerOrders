@@ -1,4 +1,4 @@
-package com.rigid.softwaresolutions.flowerorders
+package com.vrares.flowerorders
 
 import org.junit.Test
 
