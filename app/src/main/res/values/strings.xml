@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FlowerOrders</string>
+    <string name="order_id">Order #%d</string>
+    <string name="price">#%dRON</string>
 </resources>
