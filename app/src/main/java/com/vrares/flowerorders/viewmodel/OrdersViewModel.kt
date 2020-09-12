@@ -1,46 +1,33 @@
 package com.vrares.flowerorders.viewmodel
 
-import com.google.gson.GsonBuilder
+import androidx.lifecycle.MutableLiveData
+import com.vrares.flowerorders.model.OrdersRepository
 import com.vrares.flowerorders.model.models.Order
-import com.vrares.flowerorders.model.networking.OrdersService
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 
-class OrdersViewModel {
+class OrdersViewModel : Callback {
 
     private var myCompositeDisposable: CompositeDisposable? = null
+    private val ordersRepository = OrdersRepository()
+    private val ordersList = MutableLiveData<List<Order>>()
 
     init {
         myCompositeDisposable = CompositeDisposable()
+        myCompositeDisposable?.add(ordersRepository.getOrders(this))
     }
 
-    fun getOrders() {
-        val requestInterface = Retrofit.Builder()
-            .baseUrl("http://demo1875631.mockable.io")
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-            .create(OrdersService::class.java)
-
-        myCompositeDisposable?.add(
-            requestInterface.getOrders()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                    { result -> handleResponse(result) },
-                    { throwable -> onError(throwable) })
-        )
+    fun getOrders(): MutableLiveData<List<Order>> {
+        return ordersList
     }
 
-    private fun handleResponse(list: List<Order>) {
-        println("VULTURU" + list)
+    fun onOrderClick(order: Order) {
     }
 
-    fun onError(throwable: Throwable) {
-        throwable.stackTrace
+    override fun onSuccess(list: List<Order>) {
+        ordersList.value = list
+    }
+
+    override fun unError(throwable: Throwable) {
+        TODO("Not yet implemented")
     }
 }
