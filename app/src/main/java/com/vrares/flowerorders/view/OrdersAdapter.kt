@@ -8,7 +8,10 @@ import com.vrares.flowerorders.R
 import com.vrares.flowerorders.databinding.ItemOrderBinding
 import com.vrares.flowerorders.model.models.Order
 
-class OrdersAdapter(private val orders: List<Order>) :
+class OrdersAdapter(
+    private val orders: List<Order>,
+    private val orderClickListener: OnOrderClickListener
+) :
     RecyclerView.Adapter<OrdersAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
@@ -30,6 +33,7 @@ class OrdersAdapter(private val orders: List<Order>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
             binding.order = order
+            binding.clickListener = orderClickListener
             binding.executePendingBindings()
         }
     }

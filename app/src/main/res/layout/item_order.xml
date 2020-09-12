@@ -9,14 +9,15 @@
             type="com.vrares.flowerorders.model.models.Order" />
 
         <variable
-            name="viewModel"
-            type="com.vrares.flowerorders.viewmodel.OrdersViewModel" />
+            name="clickListener"
+            type="com.vrares.flowerorders.view.OnOrderClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.onOrderClick(order)}">
+        android:onClick="@{() -> clickListener.onOrderClicked(order)}"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/order_id"

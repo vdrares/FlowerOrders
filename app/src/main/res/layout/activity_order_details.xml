@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="order"
+            type="com.vrares.flowerorders.model.models.Order" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        tools:context=".view.OrderDetailsActivity">
+
+        <TextView
+            android:id="@+id/order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/order_id, order.id)}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Order #234" />
+
+        <TextView
+            android:id="@+id/order_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{order.description}"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_number"
+            tools:text="Red Roses" />
+
+        <TextView
+            android:id="@+id/delivered_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.format(@string/deliver_to, order.deliver_to)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Delivered to Sanzaiana" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@{String.format(@string/price, order.price)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/order_description"
+            tools:text="35 RON" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

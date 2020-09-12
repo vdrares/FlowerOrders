@@ -1,3 +1,5 @@
 package com.vrares.flowerorders.model.models
 
-data class Order(val id: Int, val price: Int, val description: String, val deliver_to: String)
+import java.io.Serializable
+
+data class Order(val id: Int, val price: Int, val description: String, val deliver_to: String) : Serializable
